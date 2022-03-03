@@ -4,6 +4,7 @@ private final static int NUM_ROWS = 5;
 private final static int NUM_COLS = 5;
 private MSButton[][] buttons; //2d array of minesweeper buttons
 private ArrayList <MSButton> mines = new ArrayList<MSButton>(); //ArrayList of just the minesweeper buttons that are mined
+private color[][] colors = new color[NUM_ROWS][NUM_COLS];
 
 void setup ()
 {
@@ -12,7 +13,7 @@ void setup ()
     
     // make the manager
     Interactive.make( this );
-    
+    setColor();
     //your code to initialize buttons goes here
     buttons = new MSButton[NUM_ROWS][NUM_COLS];
     for (int r = 0; r < NUM_ROWS; r++) {
@@ -25,6 +26,20 @@ void setup ()
       setMines();
     }
 }
+public void setColor() {
+  boolean light = true;
+  for (int r = 0; r < NUM_ROWS; r++){
+    for (int c = 0; c < NUM_COLS; c++){
+      if (light) {
+        colors[r][c] = color(155,223,54);  //light green
+        light = false;
+      } else {
+        colors[r][c] = color(142,202,46); //dark green
+        light = true;
+      }
+    }
+  } 
+}  
 public void setMines()
 {
     //your code
@@ -110,6 +125,7 @@ public class MSButton
     private float x,y, width, height;
     private boolean clicked, flagged;
     private String myLabel;
+    private color myColor;
     
     public MSButton ( int row, int col )
     {
@@ -121,9 +137,11 @@ public class MSButton
         y = myRow*height;
         myLabel = "";
         flagged = clicked = false;
+        myColor = colors[row][col];
+        println(colors[row][col]);
         Interactive.add( this ); // register it with the manager
     }
-
+    
     // called by manager
     public void mousePressed () 
     {
@@ -148,22 +166,30 @@ public class MSButton
             }
           }
         }
-        
     }
+    
     public void draw () 
     {    
         if (flagged)
-            fill(0);
+            fill(220,50,50);
          else if( clicked && mines.contains(this) ) 
              fill(255,0,0);
         else if(clicked)
-            fill( 200 );
+            fill(219,184,148);
         else 
-            fill( 100 );
+            fill( myColor );
 
         rect(x, y, width, height);
-        fill(0);
+        textSize(20); 
+        fill(getColor());
         text(myLabel,x+width/2,y+height/2);
+    }
+    public color getColor() {
+      if (myLabel.equals("1"))
+        return color(230,63,56);
+      else if (myLabel.equals("2"))
+        return color(71,160,80);
+      return color(0);
     }
     public void setLabel(String newLabel)
     {
