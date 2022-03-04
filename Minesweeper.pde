@@ -170,8 +170,11 @@ public class MSButton
     
     public void draw () 
     {    
-        if (flagged)
-            fill(220,50,50);
+        if (flagged) {
+            //fill(220,50,50);
+            fill(219,184,148);
+            
+        }
          else if( clicked && mines.contains(this) ) 
              fill(255,0,0);
         else if(clicked)
@@ -183,6 +186,20 @@ public class MSButton
         textSize(20); 
         fill(getColor());
         text(myLabel,x+width/2,y+height/2);
+        if (flagged) {
+          float cX = x+width/2;
+          float cY = y+height/2;
+          drawFlag(cX, cY);
+        }
+    }
+    public void drawFlag(float myX, float myY) {
+      push();
+      fill(255,0,0);
+      noStroke();
+      rect(myX, myY, 3, 25);
+      rect(myX-2, myY+22, 7, 4);
+      triangle(myX, myY+10, myX, myY, myX+15, myY+5);
+      pop();
     }
     public color getColor() {
       if (myLabel.equals("1"))
