@@ -156,7 +156,7 @@ public class MSButton
           displayLosingMessage();
         }
         else if (countMines(myRow, myCol) > 0) {
-          myLabel = String.valueOf( countMines(myRow, myCol) );
+          myLabel = myLabel + countMines(myRow, myCol);
         }
         else { 
           for (int r = myRow-1; r < myRow+2; r++) {
