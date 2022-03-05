@@ -193,13 +193,13 @@ public class MSButton
         }
     }
     public void drawFlag(float myX, float myY) {
-      push();
+      pushMatrix();
       fill(255,0,0);
       noStroke();
       rect(myX, myY, 3, 25);
       rect(myX-2, myY+22, 7, 4);
       triangle(myX, myY+10, myX, myY, myX+15, myY+5);
-      pop();
+      popMatrix();
     }
     public color getColor() {
       if (myLabel.equals("1"))
