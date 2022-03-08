@@ -169,6 +169,7 @@ public class MSButton
     
     public void draw () 
     {    
+        noStroke();
         if (flagged) {
             //fill(220,50,50);
             fill(219,184,148);
